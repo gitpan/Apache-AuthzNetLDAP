@@ -1,0 +1,9 @@
+Revision history for Perl extension Apache::AuthzNetLDAP.
+
+0.02  Tue Apr  4 15:09:16 2000
+	- repackaged into a cleaner distribution 
+0.04  Mon Jun  16 2003
+	- added a test.pl file with tests for "make test"
+	- changed the Makefile.PL to check for dependencies and 
+	  install them automatically
+	- modified the .pm file to work with both modperl1 and 2
