@@ -13,3 +13,9 @@ Revision history for Perl extension Apache::AuthzNetLDAP.
 	  and URI installation mandatory.
 	- Tried to fix some documentation formatting issues
 	- Update documentation to be more comprehensive
+
+0.06 Sun Jun  22 2003
+	- Made changes to the Makefile.PL to make 
+	  mod_perl installation mandatory.
+	- Added notice to Makefile.PL to warn about allowing 
+	  mod_perl2 install using ExtUtils::AutoInstall

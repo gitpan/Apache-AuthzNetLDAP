@@ -13,6 +13,15 @@
     require CPAN;CPAN::install$p};eval"use $p $v;1"||die"*** Please
     manually install $p $v from cpan.org first...\n"}}}
 
+    # notify the user about mod_perl 2
+    BEGIN { print q{
+        **************** NOTICE *********************
+        If you are planning to use mod_perl2 and Apache2, please, do not
+        answer yes when prompted to install mod_perl.  You will need to
+        download mod_perl2 manually from
+        http://perl.apache.org/download/index.html
+        *********************************************
+    } }
     
 
     # optional pre-install handler; takes $module_name and $version
@@ -34,13 +43,9 @@
                 Convert::ASN1 => '',
                 Net::LDAP => '',
 		MIME::Base64 => '',
-	    	URI 	=> '',
+	    	URI => '',
+                mod_perl => '',
         ],              # core modules; may also be 'all'
-        'Feature1'      => [
-            # do we want to install this feature by default?
-            -default    => ( system('feature1 --version') == 0 ),
-            mod_perl    => '',
-        ],
     );
 
     WriteMakefile(

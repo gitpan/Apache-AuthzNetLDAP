@@ -18,7 +18,7 @@ use mod_perl;
 @EXPORT = qw(
 
 );
-$VERSION = '0.05';
+$VERSION = '0.06';
 #bootstrap Apache::AuthzNetLDAP $VERSION;
 
 # setting the constants to help identify which version of mod_perl
