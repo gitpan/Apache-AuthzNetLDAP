@@ -19,3 +19,6 @@ Revision history for Perl extension Apache::AuthzNetLDAP.
 	  mod_perl installation mandatory.
 	- Added notice to Makefile.PL to warn about allowing 
 	  mod_perl2 install using ExtUtils::AutoInstall
+
+0.07 Wed Jul  02 2003
+	- Took care of some stray "return"s...

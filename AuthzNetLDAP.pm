@@ -18,7 +18,7 @@ use mod_perl;
 @EXPORT = qw(
 
 );
-$VERSION = '0.06';
+$VERSION = '0.07';
 #bootstrap Apache::AuthzNetLDAP $VERSION;
 
 # setting the constants to help identify which version of mod_perl
@@ -120,7 +120,7 @@ sub handler
        my ($requirement,@rest) = split(/\s+/, $req->{requirement});
      if (lc $requirement eq 'user')
      {
-        foreach (@rest) {return return MP2 ? Apache::OK : Apache::Constants::OK if $username eq $_;}
+        foreach (@rest) {return MP2 ? Apache::OK : Apache::Constants::OK if $username eq $_;}
      }
      elsif (lc $requirement eq 'group')
     {
@@ -129,17 +129,17 @@ sub handler
         my ($foo,$group) = split(/"/,$req->{requirement}); 
          my $isMember = Apache::AuthzNetLDAP::_getIsMember($ldap,$r,$group,$entry->dn());
          MP2 ? $r->log_error("user $username: group($group) DEBUG - isMember: $isMember",$r->uri) : $r->log_reason("user $username: group($group) DEBUG - isMember: $isMember",$r->uri);
-         return return MP2 ? Apache::OK : Apache::Constants::OK if $isMember;
+         return MP2 ? Apache::OK : Apache::Constants::OK if $isMember;
      }
 	  elsif (lc $requirement eq 'ldap-url')
 	 {
 	     my ($foo,$url) = split (/ldap-url/,$req->{requirement});
         my $isMember = Apache::AuthzNetLDAP::_checkURL($r,$ldap,$entry->dn(),$url);
 		MP2 ? $r->log_error("user $username: group($url) DEBUG - isMember: $isMember",$r->uri) : $r->log_reason("user $username: group($url) DEBUG - isMember: $isMember",$r->uri);
-		return return MP2 ? Apache::OK : Apache::Constants::OK if $isMember;
+		return MP2 ? Apache::OK : Apache::Constants::OK if $isMember;
       }	     
      elsif (lc $requirement eq 'valid-user') {
-         return return MP2 ? Apache::OK : Apache::Constants::OK;
+         return MP2 ? Apache::OK : Apache::Constants::OK;
               }
    }       
 
