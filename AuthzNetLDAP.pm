@@ -18,7 +18,7 @@ use mod_perl;
 @EXPORT = qw(
 
 );
-$VERSION = '0.04';
+$VERSION = '0.05';
 #bootstrap Apache::AuthzNetLDAP $VERSION;
 
 # setting the constants to help identify which version of mod_perl
@@ -340,7 +340,6 @@ based on LDAP attributes.
 
 =head1 SYNOPSIS
 
-  use Apache::AuthzNetLDAP;
   PerlSetVar BindDN "cn=Directory Manager"
   PerlSetVar BindPWD "password"
   PerlSetVar BaseDN "ou=people,o=unt.edu"
@@ -370,25 +369,57 @@ the Web resource under this modules control.
 You can control authorization via one of four methods. The first two are
 pretty standard, the second two are unique to LDAP.
 
-=item user I<username>
-Will authorize access if the authenticated user's I<username>.
+"require" options -- 
 
-=item valid-user
-Will authorize any authenticated user.
+user -> Will authorize access if the authenticated user's I<username>.
 
-=item group I<groupdn>
-Will authorize any authenticated user who is a member of the LDAP group
+valid-user -> Will authorize any authenticated user.
+
+group -> Will authorize any authenticated user who is a member of the LDAP group
 specified by I<groupdn>. This module supports groupOfMember, groupOfUniquemember
 and Netscape's dynamic group object classes.
 
-=item ldap-url I<ldap-url>
-This will authorize any authenticated user who matches the query specified
+ldap-url -> This will authorize any authenticated user who matches the query specified
 in the given LDAP URL. This is enables users to get the flexibility of Netscape's
 dynamic groups, even if their LDAP server does not support such a capability.  
 
+=head1 CONFIGURATION NOTES
+
+ It is important to note that this module must be used in conjunction with an authentication module. (...? 
+Is this true?  I just thought, that you might want to only authorize a user, instead of authenticate...)
+If you are using an authentication module, then the following lines will not need to be duplicated:
+
+
+  PerlSetVar BindDN "cn=Directory Manager"
+  PerlSetVar BindPWD "password"
+  PerlSetVar BaseDN "ou=people,o=unt.edu"
+  PerlSetVar LDAPServer ldap.unt.edu
+  PerlSetVar LDAPPort 389
+  PerlSetVar UIDAttr uid
+ #PerlSetVar UIDAttr mail 
+
+  PerlAuthenHandler Apache::AuthNetLDAP
+
+The following lines will not need to be duplicated if supported by the authentication module:
+
+  #require valid-user     
+  #require user mewilcox
+  #require user mewilcox@venus.acs.unt.edu
+  #require group "cn=Peoplebrowsers1,ou=UNTGroups,ou=People, o=unt.edu"
+  #require ldap-url ldap://pandora.acs.unt.edu/o=unt.edu??sub?sn=wilcox
+  #require ldap-url ldap://pandora.acs.unt.edu/o=unt.edu??sub?sn=smith
+  #require ldap-url ldap://castor.acs.unt.edu/ou=people,o=unt.edu??sub?untcourse=
+
+Obviously, the ldap-url attribute is probably only support by this module.  
+
+Check out the following link for options to load the module:
+
+http://perl.apache.org/docs/1.0/guide/config.html#The_Startup_File
+http://perl.apache.org/docs/2.0/user/config/config.html#Startup_File
+
 =head1 AUTHOR
 
-Mark Wilcox mewilcox@unt.edu
+Mark Wilcox mewilcox@unt.edu and
 Shannon Eric Peevey speeves@unt.edu
 
 =head1 SEE ALSO

@@ -7,3 +7,9 @@ Revision history for Perl extension Apache::AuthzNetLDAP.
 	- changed the Makefile.PL to check for dependencies and 
 	  install them automatically
 	- modified the .pm file to work with both modperl1 and 2
+
+0.05  Sat Jun  21 2003
+	- Made changes to the Makefile.PL to make Net::LDAP
+	  and URI installation mandatory.
+	- Tried to fix some documentation formatting issues
+	- Update documentation to be more comprehensive

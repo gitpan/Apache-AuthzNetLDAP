@@ -30,28 +30,17 @@
 	    force	=> 1,		# pseudo-option to force install
 	    do_once	=> 1,		# skip previously failed modules
 	},
-	-core		=> 'all', 		# core modules; may also be 'all'
-        'Feature1'	=> [
-	    # do we want to install this feature by default?
-	    -default	=> ( system('feature1 --version') == 0 ),
-	    Net::LDAP	=> '',
-	],
-        'Feature2'	=> [
-	    # do we want to install this feature by default?
-	    # Make sure to answer no if you want mod_perl 2
-	    # (Will be able to answer yes, once it is out of 
-	    # development.)
-	    -default	=> ( system('feature1 --version') == 0 ),
-	    mod_perl	=> '',
-	],
-        'Feature3'	=> [
-	    # do we want to install this feature by default?
-	    # Make sure to answer no if you want mod_perl 2
-	    # (Will be able to answer yes, once it is out of 
-	    # development.)
-	    -default	=> ( system('feature1 --version') == 0 ),
-	    URI 	=> '',
-	],
+	-core           => [
+                Convert::ASN1 => '',
+                Net::LDAP => '',
+		MIME::Base64 => '',
+	    	URI 	=> '',
+        ],              # core modules; may also be 'all'
+        'Feature1'      => [
+            # do we want to install this feature by default?
+            -default    => ( system('feature1 --version') == 0 ),
+            mod_perl    => '',
+        ],
     );
 
     WriteMakefile(
